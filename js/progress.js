@@ -43,7 +43,6 @@
                 //2.鼠标移动
                $(document).mousemove(function (event) {
                    //获取鼠标点击的位置
-                   
                    eventLeft = Math.floor(event.pageX);
                    length = eventLeft - offsetLeft;
                    if(length <= 0){
