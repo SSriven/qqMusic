@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>qq音乐</title>
+    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+<body>
+<header>
+    <img src="https://y.gtimg.cn/mediastyle/yqq/img/player_logo@2x.png">
+    <div class="right">
+        <span>登录</span>
+        <span>设置</span>
+    </div>
+</header>
+<section>
+    <div class="main">
+        <div class="main_left">
+            <div class="main_left_nav">
+                <ul>
+                    <li>
+                        <span class="srivenIcon-9"></span>
+                        <span>收藏</span>
+                    </li>
+                    <li>
+                        <span class="srivenIcon-11"></span>
+                        <span>添加到</span>
+                    </li>
+                    <li>
+                        <span class="srivenIcon-13"></span>
+                        <span>下载</span>
+                    </li>
+                    <li>
+                        <span class="srivenIcon-7"></span>
+                        <span>删除</span>
+                    </li>
+                    <li>
+                        <span class="srivenIcon-6"></span>
+                        <span>清空列表</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="music_list" data-mcs-theme="minimal-dark">
+                <ul>
+                    <li class="music_title">
+                        <div class="check_box"><i></i></div>
+                        <div class="index"></div>
+                        <div class="music_name">歌曲</div>
+                        <div class="music_singer">歌手</div>
+                        <div class="music_time">时间</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main_right">
+            <div class="right_music_info">
+                <a href="javascript:;" class="music_info_pic">
+                    <img src="https://api.bzqll.com/music/tencent/pic?id=003OUlho2HcRHC&key=579621905" alt="专辑">
+                </a>
+                <div id="song_name" class="song_info">歌曲名：
+                    <a href="javascript:;">告白气球</a>
+                </div>
+                <div id="song_singer" class="song_info">歌手名：
+                    <a href="javascript:;">周杰伦</a>
+                </div>
+                <div id="song_ablum" class="song_info">专辑名：
+                    <a href="javascript:;">告白气球</a>
+                </div>
+            </div>
+            <ul class="music_info_lyric">
+                <li class="cur">第一条歌词</li>
+                <li>第二条歌词</li>
+            </ul>
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="footer_in">
+        <a href="javascript:;" title="上一首" class="footer_prev"><i class="srivenIcon-8"></i></a>
+        <a href="javascript:;" title="播放" class="footer_play"><i class="srivenIcon-uniE904"></i></a>
+        <a href="javascript:;" title="下一首" class="footer_next"><i class="srivenIcon-12"></i></a>
+        <div class="music_progress_info">
+            <div class="song_name_time">
+                <div class="song_name">
+                    <span id="progress_name" class="name">告白气球 - 周杰伦</span>
+                </div>
+                <div class="song_time">
+                    <span id="progress_time" class="progress_time">01:22 / 05:24</span>
+                </div>
+            </div>
+            <div class="progress_bar">
+                <div class="progress_size"></div>
+                <div class="progress_dot"></div>
+            </div>
+        </div>
+        <a href="javascript:;" title="列表循环" class="menu"><i class="srivenIcon-14"></i></a>
+        <a href="javascript:;" title="喜欢" class="menu"><i class="srivenIcon-9"></i></a>
+        <a href="javascript:;" title="下载" class="menu"><i class="srivenIcon-13"></i></a>
+        <a href="javascript:;" title="评论" class="menu leave"><i class="srivenIcon-5"></i></a>
+        <div class="music_voice">
+            <a href="javascript:;" title="关闭声音" id="music_voice" class="srivenIcon-15"></a>
+            <div class="voice_bar">
+                <div class="voice_size"></div>
+                <div class="voice_dot"></div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="mask_bg"></div>
+<div class="mask"></div>
+<audio src=""></audio>
+<script src="js/jquery-1.11.3-min.js"></script>
+<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="js/player.js"></script>
+<script src="js/progress.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
