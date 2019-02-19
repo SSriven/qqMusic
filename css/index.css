@@ -215,17 +215,25 @@ section .main_left .main_left_nav{
     white-space: nowrap;
     
 }
-.main_right .music_info_lyric{
-    text-align: center;
-    width: 320px;
+.main_right .lyric_container{
     margin-left: 120px;
     margin-top: 50px;
+    height: 150px;
+    width: 320px;
+    overflow: hidden;
+}
+.main_right .music_info_lyric{
+    text-align: center;
 }
 .main_right .music_info_lyric li{
     list-style: none;
     line-height: 30px;
     color:rgba(255,255,255,0.5);
     font-weight: bold;
+    overflow: hidden;
+    height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .main_right .music_info_lyric .cur{
     color:#31c27c;
@@ -326,7 +334,7 @@ footer .footer_in .music_voice .voice_bar{
     cursor: pointer;
 }
 footer .footer_in .music_voice .voice_bar .voice_size{
-    width: 50px;
+    width: 0;
     height: 3px;
     background-color: #fff;
 }

@@ -3,27 +3,48 @@ $(function () {
     $(".music_list").mCustomScrollbar();
     //1.加载歌曲
     musicOnload();
-
     var audio = $("audio");
     var player = new Player(audio);
-    var progressBar = $(".progress_bar");
-    var progressSize = $(".progress_size");
-    var progressDot = $(".progress_dot");
-    var progress = new Progress(progressBar,progressSize,progressDot);
-    progress.progressClick(function (value) {
-        player.musicSeekTo(value);
-    });
-    progress.progressMove(function (value) {
-        //跳转到指定时间播放
-        player.musicSeekTo(value);
-    },function (timeStr) {
-        //同步时间
-        $("#progress_time").text(timeStr);
-    },player.audio);
+    var progress;
+    var voiceProgress;
+    var lyric;
+    // var marginTop = $(".music_info_lyric li").eq(0).height();
+    // var preindex = 0;
+    //初始化进度条
+    initProgress();
+
     //2.所有事件
     eventInit();
 
 
+    function initProgress() {
+        var progressBar = $(".progress_bar");
+        var progressSize = $(".progress_size");
+        var progressDot = $(".progress_dot");
+        progress = new Progress(progressBar,progressSize,progressDot);
+        progress.progressClick(function (value) {
+            player.musicSeekTo(value);
+        });
+        progress.progressMove(function (value) {
+            //跳转到指定时间播放
+            player.musicSeekTo(value);
+        },function (timeStr) {
+            //同步时间
+            $("#progress_time").text(timeStr);
+        },player.audio);
+        var voiceProgressBar = $(".voice_bar");
+        var voiceProgressSize = $(".voice_size");
+        var voiceProgressDot = $(".voice_dot");
+        voiceProgress = new Progress(voiceProgressBar,voiceProgressSize,voiceProgressDot);
+        player.musicVoiceSeekTo(0.5);
+        voiceProgress.setProgress(50);
+        voiceProgress.progressClick(function (value) {
+            player.musicVoiceSeekTo(value);
+        });
+        voiceProgress.progressMove(function (value) {
+            player.musicVoiceSeekTo(value);
+        });
+    }
 
     /**
      * 加载歌曲
@@ -43,6 +64,7 @@ $(function () {
                     musicList.append(item);
                 });
                 initMusicInfo(data[0]);
+                initMusicLyric(data[0]);
 
             },
             error: function (e) {
@@ -77,7 +99,17 @@ $(function () {
         progressTime.text(curMin + ":" + curSec +" / " + minute +":"+second);
         maskBg.css("background","url("+music.data[0].pic+")");
     }
-
+    function initMusicLyric(music){
+        lyric = new Lyric(music.data[0].lrc);
+        lyric.loadLyric(function () {
+            var lyricContainer = $(".music_info_lyric");
+            lyricContainer.html("");
+            $.each(lyric.lyrics,function (index,ele) {
+                var item = $("<li>"+ele+"</li>");
+                lyricContainer.append(item);
+            })
+        });
+    }
     /**
      * 监听事件
      */
@@ -146,6 +178,9 @@ $(function () {
             player.playMusic(music_item.get(0).index,music_item.get(0).music);
             //3.6切换歌曲信息
             initMusicInfo(music_item.get(0).music);
+            //3.7切换歌曲歌词
+            initMusicLyric(music_item.get(0).music);
+            //
         });
         //4.监听底部播放按钮的点击事件
         bottomPlay.click(function () {
@@ -153,6 +188,7 @@ $(function () {
             if(player.currentIndex === -1){
                 //没有播放过
                 // console.log($(".music_info").eq(0).find(".list_menu_play"));
+                progress.setProgress(0);
                 $(".music_info").eq(0).find(".list_menu_play").trigger("click");
             }else{
                 $(".music_info").eq(player.currentIndex).find(".list_menu_play").trigger("click");
@@ -191,6 +227,21 @@ $(function () {
             //同步进度条
             var value = currentTime / duration * 100;
             progress.setProgress(value);
+            var curindex = lyric.currentIndex(currentTime);
+            var item = $(".music_info_lyric li").eq(curindex);
+            item.addClass("cur");
+            item.siblings().removeClass("cur");
+            if(curindex <= 2) return;
+            $(".music_info_lyric").css(
+                {
+                    marginTop:((-curindex+2) * item.height())
+                }
+            );
+            // if(preindex < curindex)
+            //     marginTop -= (item.height()-$(".music_info_lyric li").eq(preindex).height()) <= 0 ? item.height() : item.height()-$(".music_info_lyric li").eq(preindex).height();
+            // preindex = curindex;
+        },function () {
+            $(".footer_next").trigger("click");
         });
 
         //9.监听音量的点击

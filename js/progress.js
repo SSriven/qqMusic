@@ -53,10 +53,12 @@
                    }
                    //设置前景宽度
                    $this.$progressSize.css("width",length);
-                   $this.$progressDot.css("left",length);
+                   $this.$progressDot.css("left",length-10 < 0 ? 0 : length - 10);
                    //计算进度条的比例
-                   var value = length / $this.$progressBar.width();
-                   $this.moveTimeUpdate(value,audio,callBack2);
+                   if(callBack2){
+                       var value = length / $this.$progressBar.width();
+                       $this.moveTimeUpdate(value,audio,callBack2);
+                   }
                });
             });
             //3.鼠标抬起

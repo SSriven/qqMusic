@@ -16,7 +16,7 @@
         //当前播放的音乐的索引
         currentIndex:-1,
         //播放或暂停
-        playMusic:function (index,music) {
+        playMusic:function (index,music,callBack) {
             //判断当前索引和即将要播放的歌曲的索引是否一样
             if(index === this.currentIndex){
                 if(this.audio.paused){
@@ -57,11 +57,14 @@
             }
         },
         //更新时间
-        musicTimeUpdate:function (callBack) {
+        musicTimeUpdate:function (callBack,callBack2) {
             var $this = this;
             this.$audio.on("timeupdate",function () {
                 var timeStr = $this.timeFormat($this.audio.duration,$this.audio.currentTime);
                 callBack($this.audio.duration,$this.audio.currentTime,timeStr);
+                if($this.audio.currentTime >= $this.audio.duration){
+                    callBack2();
+                }
             });
         },
         //格式化时间
@@ -74,11 +77,19 @@
         },
         //跳转到指定时间播放
         musicSeekTo:function (value) {
+            if(isNaN(value)) return;
+            if(value < 0 || value > 1) return;
+            if(isNaN(this.audio.duration)) return;
+            console.log(this.audio);
+            console.log(this.audio.currentTime);
+            console.log(this.audio.duration);
             this.audio.currentTime = this.audio.duration * value;
 
         },
         //设置音量
         musicVoiceSeekTo:function (value) {
+            if(isNaN(value)) return;
+            if(value < 0 || value > 1) return;
             this.audio.volume = value;
         }
     };
