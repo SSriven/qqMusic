@@ -16,7 +16,7 @@
         //当前播放的音乐的索引
         currentIndex:-1,
         //播放或暂停
-        playMusic:function (index,music,callBack) {
+        playMusic:function (index,music) {
             //判断当前索引和即将要播放的歌曲的索引是否一样
             if(index === this.currentIndex){
                 if(this.audio.paused){
@@ -27,7 +27,7 @@
                 }
             }else{
                 //不是同一首歌
-                this.$audio.attr("src",music.data[0].url);
+                this.$audio.attr("src",music.songurl);
                 this.audio.play();
                 this.currentIndex = index;
             }
@@ -80,9 +80,6 @@
             if(isNaN(value)) return;
             if(value < 0 || value > 1) return;
             if(isNaN(this.audio.duration)) return;
-            console.log(this.audio);
-            console.log(this.audio.currentTime);
-            console.log(this.audio.duration);
             this.audio.currentTime = this.audio.duration * value;
 
         },
@@ -92,6 +89,15 @@
             if(value < 0 || value > 1) return;
             this.audio.volume = value;
         }
+        //下载歌曲
+        // musicDownload:function (callBack) {
+        //     if(this.currentIndex === -1){
+        //         this.$audio.attr("src",this.musicList[0].data[0].url);
+        //         callBack(this.musicList[0].data[0].url);
+        //         return;
+        //     }
+        //     callBack(this.musicList[this.currentIndex].data[0].url);
+        // }
     };
     Player.prototype.init.prototype = Player.prototype;
     window.Player = Player;

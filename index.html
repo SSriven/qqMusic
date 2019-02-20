@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <title>qq音乐</title>
     <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" href="css/index.css">
@@ -9,10 +10,18 @@
 </head>
 <body>
 <header>
-    <img src="https://y.gtimg.cn/mediastyle/yqq/img/player_logo@2x.png">
+    <!--<img src="https://y.gtimg.cn/mediastyle/yqq/img/player_logo@2x.png">-->
+    <i class="srivenIcon-uniE918"></i>
     <div class="right">
-        <span>登录</span>
-        <span>设置</span>
+        <!--<span>登录</span>-->
+        <!--<span>设置</span>-->
+        <div class="search_box">
+            <input id="input" type="text" name="search" value="" placeholder="请输入歌名,歌手">
+            <ul>
+            </ul>
+            <span id="search" class="search"><i class="srivenIcon-17"></i></span>
+        </div>
+
     </div>
 </header>
 <section>
@@ -96,9 +105,9 @@
             </div>
         </div>
         <a href="javascript:;" title="列表循环" class="menu"><i class="srivenIcon-14"></i></a>
-        <a href="javascript:;" title="喜欢" class="menu"><i class="srivenIcon-9"></i></a>
-        <a href="javascript:;" title="下载" class="menu"><i class="srivenIcon-13"></i></a>
+        <a href="javascript:;" title="下载" id="footer_download" class="menu"><i class="srivenIcon-13"></i></a>
         <a href="javascript:;" title="评论" class="menu leave"><i class="srivenIcon-5"></i></a>
+        <!--<a href="javascript:;" title="打开纯净模式" class="menu"><span class="srivenIcon-19"><i class="path2"></i></span></a>-->
         <div class="music_voice">
             <a href="javascript:;" title="关闭声音" id="music_voice" class="srivenIcon-15"></a>
             <div class="voice_bar">
@@ -110,12 +119,29 @@
 </footer>
 <div class="mask_bg"></div>
 <div class="mask"></div>
+<div class="search_container">
+    <div class="search_result_box">
+        <p class="title">搜索结果</p>
+        <a href="javascript:;" title="关闭" class="close"><i class="srivenIcon-uniE91A"></i></a>
+        <div class="search_result_list" data-mcs-theme="dark">
+            <ul>
+                <li>
+                    <div class="list_number">序号</div>
+                    <div class="list_name">歌名</div>
+                    <div class="list_singer">歌手</div>
+                    <div class="list_time">时长</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <audio src=""></audio>
 <script src="js/jquery-1.11.3-min.js"></script>
 <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="js/player.js"></script>
 <script src="js/progress.js"></script>
 <script src="js/lyric.js"></script>
+<script src="js/search.js"></script>
 <script src="js/index.js"></script>
 </body>
 </html>
