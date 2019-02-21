@@ -74,6 +74,7 @@
             });
 
         },
+        //设置进度条的长度
         setProgress:function (value) {
             if(this.isMove) return;
             if(value < 0 || value > 100) return;

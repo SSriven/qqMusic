@@ -89,15 +89,6 @@
             if(value < 0 || value > 1) return;
             this.audio.volume = value;
         }
-        //下载歌曲
-        // musicDownload:function (callBack) {
-        //     if(this.currentIndex === -1){
-        //         this.$audio.attr("src",this.musicList[0].data[0].url);
-        //         callBack(this.musicList[0].data[0].url);
-        //         return;
-        //     }
-        //     callBack(this.musicList[this.currentIndex].data[0].url);
-        // }
     };
     Player.prototype.init.prototype = Player.prototype;
     window.Player = Player;
