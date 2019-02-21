@@ -60,7 +60,7 @@
             $.each(array,function (index,ele) {
                 if(ele === "") return true;
                 var lrc = ele.split("]")[1];//获取歌词文字
-                if(lrc.length === 0) return true;
+                if(lrc === "" || lrc === undefined) return true;
                 $this.lyrics.push(lrc);//把获取的给文字放入数组
                 var res = timeReg.exec(ele);//验证正则表达式
                 if(res === null) return true;

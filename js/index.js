@@ -297,7 +297,6 @@ $(function () {
             try{
                 var offset = item.offset().top - $(".music_info_lyric").offset().top;
             }catch(ex){
-                console.log(ex);
                 offset = 0;
             }finally {
                 if (offset < item.height() ||
@@ -306,7 +305,6 @@ $(function () {
             if(item.height() >= 40){
                 n = 1;
                 $(".lyric_container").css("height","180px");
-                console.log(1);
             }else {
                 n = 2;
                 $(".lyric_container").css("height","150px");
