@@ -53,7 +53,7 @@
             $this.translateLyrics = [];
             var array1 = data.split("[offset:0]")[1];//获取原生歌词和时间
             var array2 = data.split("[offset:0]")[2];//获取翻译歌词和时间
-            var array = array1.split("\n");//把歌词放入数组
+            var array = array1 !== undefined ? array1.split("\n") : [""];//把歌词放入数组
             var translate = array2 !== undefined ? array2.split("\n") : [""];
             var timeReg = /\[(\d*:\d*\.\d*)\]/;//正则表达式用于获取时间
             //遍历歌词

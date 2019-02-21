@@ -205,7 +205,7 @@ section .main_left .main_left_nav{
     vertical-align: -2px;
 }
 .selected{
-    background: url("../images/勾选线.png") no-repeat #fff;
+    background: url("../images/勾选线.png") no-repeat #000;
     background-size: 15px 15px;
     opacity: 1;
 }

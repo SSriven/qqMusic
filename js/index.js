@@ -303,9 +303,10 @@ $(function () {
                 if (offset < item.height() ||
                     offset >= $(".music_info_lyric").height() - item.height()) return;
             }
-            if(item.height() >= 60){
+            if(item.height() >= 40){
                 n = 1;
                 $(".lyric_container").css("height","180px");
+                console.log(1);
             }else {
                 n = 2;
                 $(".lyric_container").css("height","150px");
@@ -370,9 +371,9 @@ $(function () {
         $("#search").click(function () {
             //搜索
             searchBox.find(".result_list").remove();
+            if($("#input").val() === "") return;
             $(".search_container").css("display", "block");
             search.searchMusic($("#input").val(), creatSearchResultPage);
-
         });
 
 
@@ -397,6 +398,7 @@ $(function () {
         $(".search_result_list").delegate(".result_list a","click",function () {
             var music_item = $(this).parents(".result_list");
             addMusic(music_item);
+            return false;//阻止事件冒泡
         });
 
 
@@ -406,6 +408,22 @@ $(function () {
             addMusic($(this));
             //播放
             $(".music_info").eq(player.musicList.length - 1).find(".list_menu_play").trigger("click");
+        });
+
+        //16.搜索框按键事件
+        $("#input").keypress(function (event) {
+            switch(event.keyCode){
+                case 13:$("#search").trigger("click");break;
+                default:break;
+            }
+        });
+
+        //17.按空格键实现暂停和播放
+        $(document).keypress(function (event) {
+            switch(event.keyCode || event.which){
+                case 32:bottomPlay.trigger("click");break;
+                default:break;
+            }
         });
 
     }

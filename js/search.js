@@ -39,7 +39,7 @@
         },
         //搜索歌曲
         searchMusic:function (value,callBack) {
-            if(value === "") return;
+            // if(value === "") return;
             var url = 'https://api.bzqll.com/music/tencent/search?key=579621905&s='+value+'&limit=100&offset=0&type=song';
             $.ajax({
                 url:url,
