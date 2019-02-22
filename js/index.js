@@ -138,9 +138,14 @@ $(function () {
                 marginTop:0
             });
             var translate = "";
+            var item;
             $.each(lyric.lyrics, function (index, ele) {
                 translate = lyric.translateLyrics[index] !== undefined ? lyric.translateLyrics[index] : "";
-                var item = $("<li><p>" + ele + "</p><p>"+translate+"</p></li>");
+                if(translate === ""){
+                    item = $("<li><p>" + ele + "</p></li>");
+                }else{
+                    item = $("<li><p>" + ele + "</p><p>"+translate+"</p></li>");
+                }
                 lyricContainer.append(item);
             })
         });
@@ -207,11 +212,14 @@ $(function () {
                 //当前是播放状态
                 bottomPlay.find("i").addClass("srivenIcon-16");
                 $(this).attr("title", "暂停");
+                bottomPlay.attr("title", "暂停");
                 music_item.siblings().find(".list_menu_play").attr("title", "播放");
                 //让文字高亮
                 music_item.find("div").css("color", "rgba(255,255,255,1)");
                 music_item.siblings().find("div").css("color", "rgba(255,255,255,0.5)");
             } else {
+                $(this).attr("title", "播放");
+                bottomPlay.attr("title", "播放");
                 //当前是暂停状态
                 bottomPlay.find("i").removeClass("srivenIcon-16");
                 //让文字不高亮
@@ -409,7 +417,8 @@ $(function () {
         });
 
         //16.搜索框按键事件
-        $("#input").keypress(function (event) {
+        $("#input").keydown(function (event) {
+            stopBubble(event);//组织冒泡
             switch(event.keyCode){
                 case 13:$("#search").trigger("click");break;
                 default:break;
@@ -417,13 +426,27 @@ $(function () {
         });
 
         //17.按空格键实现暂停和播放
-        $(document).keypress(function (event) {
+        $(document).keydown(function (event) {
             switch(event.keyCode || event.which){
                 case 32:bottomPlay.trigger("click");break;
                 default:break;
             }
         });
 
+    }
+
+    /**
+     * 阻止冒泡
+     * @param e
+     */
+    function stopBubble(e) {
+        //如果提供了事件对象，则这是一个非IE浏览器
+        if ( e && e.stopPropagation )
+        //因此它支持W3C的stopPropagation()方法
+            e.stopPropagation();
+        else
+        //否则，我们需要使用IE的方式来取消事件冒泡
+            window.event.cancelBubble = true;
     }
 
     /**
